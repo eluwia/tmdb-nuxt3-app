@@ -164,17 +164,17 @@ function toggleProvider(id) {
 }
 function chipClass(active) {
   return active
-    ? 'px-3 py-1 rounded-full text-sm bg-zinc-900 text-white'
-    : 'px-3 py-1 rounded-full text-sm bg-zinc-100 text-zinc-700 hover:bg-zinc-200'
+    ? 'px-3 py-1 rounded-full text-sm bg-zinc-800 text-white'
+    : 'px-3 py-1 rounded-full text-sm bg-zinc-200 text-zinc-700 hover:bg-zinc-200'
 }
 </script>
 
 <template>
-  <div class="bg-white rounded-xl shadow-md text-zinc-800 max-h-[calc(100vh-6rem)] overflow-auto no-scrollbar">
+  <div class="bg-zinc-100 rounded-xl text-zinc-800 max-h-[calc(100vh-6rem)] overflow-auto no-scrollbar">
     <div class="p-4 space-y-5">
       <div class="flex items-center justify-between">
         <h3 class="text-lg font-semibold">Filters</h3>
-        <button @click="clearAll" class="text-sm text-blue-600 hover:text-blue-800">Clear All</button>
+        <button @click="clearAll" class="mr-10 text-base text-blue-600 hover:text-blue-800">Clear All</button>
       </div>
 
       <div v-if="props.mediaType !== 'person'">
@@ -209,7 +209,7 @@ function chipClass(active) {
         <div>
           <label class="block text-sm font-medium mb-2">Genres</label>
           <div v-if="loading" class="text-sm text-gray-500">Loading genres...</div>
-          <div v-else class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div v-else class="flex flex-wrap gap-2">
             <button
               v-for="g in genres"
               :key="g.id"

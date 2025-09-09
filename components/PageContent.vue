@@ -153,20 +153,20 @@ function closeFilters() { showFilters.value = false }
 
     <button
       type="button"
-      class="lg:hidden fixed bottom-4 right-4 z-[300] h-12 w-12 rounded-full bg-zinc-900/70 text-white shadow-lg flex items-center justify-center hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-sky-500"
+      class="lg:hidden fixed top-16 right-6 z-[300] h-10 w-10 rounded-full bg-zinc-900/70 text-white shadow-lg flex items-center justify-center hover:bg-zinc-800 focus:outline-none "
       @click="openFilters"
       aria-label="Open filters"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
         <path d="M3 5h18v2l-7 7v4l-4 2v-6L3 7V5z"/>
       </svg>
     </button>
 
     <div v-show="showFilters" class="lg:hidden fixed inset-0 z-[350]">
       <div class="absolute inset-0 bg-black/50" @click="closeFilters"></div>
-      <div class="absolute inset-x-0 bottom-0 rounded-t-2xl bg-zinc-100 text-zinc-900 p-4 max-h-[80vh] overflow-y-auto no-scrollbar shadow-2xl">
-        <div class="flex items-center justify-between mb-3">
-                     <button class="absolute top-2 right-2 h-8 w-8 rounded-full bg-black/40 text-white  group-hover:flex items-center justify-center" @click="closeFilters" title="Close">×</button>
+        <div class="absolute inset-x-0 bottom-0 bg-zinc-100 text-zinc-900 p-4 max-h-[80vh] overflow-y-auto no-scrollbar shadow-2xl" style="border-radius: 2rem 2rem 0 0; overflow: hidden;">
+        <div class="flex items-center justify-between  mb-3">
+                     <button class="absolute top-2 right-4 h-10 pb-1 my-7 w-10 rounded-full  text-zinc-700 hover:bg-zinc-800/10 text-3xl group-hover:flex items-center justify-center" @click="closeFilters" title="Close">×</button>
 
           
         </div>
