@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  tmdb-nuxt3-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tmdb-nuxt3-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NUXT_HOST=0.0.0.0
+      - NUXT_PORT=3000
+      - NUXT_TMDB_API_KEY=${NUXT_TMDB_API_KEY}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - tmdb-network
+
+networks:
+  tmdb-network:
+    driver: bridge
