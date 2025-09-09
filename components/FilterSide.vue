@@ -4,10 +4,10 @@ import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 const props = defineProps({
   mediaType: { type: String, required: true },
   context: { type: String, default: 'list' },
-  modelValue: { type: Object, default: () => ({}) }
+  modelValue: { type: Object, default: () => ({}) },
+  closeMobileDrawer: { type: Function, default: null }
 })
 const emit = defineEmits(['update:modelValue'])
-
 const { logoUrl } = useTmdbClient()
 
 const state = ref({
@@ -46,7 +46,6 @@ onMounted(async () => {
   }
   await nextTick()
   
-  // Listen for clear all event from PageContent
   document.addEventListener('clear-all-filters', clearAll)
 })
 
@@ -135,9 +134,12 @@ const builtParams = computed(() => {
   return p
 })
 
-
-
-function apply() { emit('update:modelValue', builtParams.value) }
+function apply() { 
+  emit('update:modelValue', builtParams.value)
+  if (props.closeMobileDrawer) {
+    props.closeMobileDrawer()
+  }
+}
 async function clearAll() {
   state.value = {
     language: '',

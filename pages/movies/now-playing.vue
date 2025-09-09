@@ -6,8 +6,8 @@
     mediaType="movie"
     :resetKey="filtersKey"
   >
-    <template #sidebar>
-      <FilterSide mediaType="movie" context="list" @update:modelValue="onFiltersChange" />
+    <template #sidebar="{ closeMobileDrawer }">
+      <FilterSide mediaType="movie" context="list" :closeMobileDrawer="closeMobileDrawer" @update:modelValue="onFiltersChange" />
     </template>
     <template #card="{ item, isFav, toggleFav }">
       <MovieCard :item="item" :isFav="isFav" :toggleFav="toggleFav" />

@@ -6,8 +6,8 @@
     mediaType="person"
     :resetKey="filtersKey"
   >
-    <template #sidebar>
-      <FilterSide mediaType="person" context="list" @update:modelValue="onFiltersChange" />
+    <template #sidebar="{ closeMobileDrawer }">
+      <FilterSide mediaType="person" context="list" :closeMobileDrawer="closeMobileDrawer" @update:modelValue="onFiltersChange" />
     </template>
     <template #card="{ item }">
       <PersonCard :item="item" />

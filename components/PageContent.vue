@@ -102,9 +102,7 @@ function toggleFav(item) {
 function openFilters() { showFilters.value = true }
 function closeFilters() { showFilters.value = false }
 
-// Clear all filters function
 function clearAll() {
-  // Dispatch a custom event that FilterSide can listen to
   const event = new CustomEvent('clear-all-filters')
   document.dispatchEvent(event)
 }
@@ -182,7 +180,7 @@ function clearAll() {
           </div>
           <div style="height: 100%; padding: 4rem 1rem 1rem 1rem; overflow-y: auto; -webkit-overflow-scrolling: touch;">
             <div class="space-y-4">
-              <slot name="sidebar"></slot>
+              <slot name="sidebar" :closeMobileDrawer="closeFilters"></slot>
             </div>
           </div>
       </div>
