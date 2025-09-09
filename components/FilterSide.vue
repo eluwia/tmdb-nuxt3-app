@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps({
   mediaType: { type: String, required: true },
@@ -45,6 +45,13 @@ onMounted(async () => {
     await loadTvProviders()
   }
   await nextTick()
+  
+  // Listen for clear all event from PageContent
+  document.addEventListener('clear-all-filters', clearAll)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('clear-all-filters', clearAll)
 })
 
 async function loadMovieGenres() {
@@ -167,15 +174,12 @@ function chipClass(active) {
     ? 'px-3 py-1 rounded-full text-sm bg-zinc-800 text-white'
     : 'px-3 py-1 rounded-full text-sm bg-zinc-200 text-zinc-700 hover:bg-zinc-200'
 }
+
 </script>
 
 <template>
-  <div class="bg-zinc-100 rounded-xl text-zinc-800 max-h-[calc(100vh-6rem)] overflow-auto no-scrollbar">
+  <div class="bg-zinc-100 rounded-xl text-zinc-800" style="min-height: 100%;">
     <div class="p-4 space-y-5">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold">Filters</h3>
-        <button @click="clearAll" class="mr-10 text-base text-blue-600 hover:text-blue-800">Clear All</button>
-      </div>
 
       <div v-if="props.mediaType !== 'person'">
         <label class="block text-sm font-medium mb-1">Sort</label>
@@ -241,7 +245,7 @@ function chipClass(active) {
           />
 
           <div v-if="loadingProviders" class="text-sm text-gray-500">Loading providers...</div>
-          <div v-else class="max-h-48 overflow-auto no-scrollbar space-y-1">
+          <div v-else class="max-h-24 overflow-auto no-scrollbar space-y-1">
             <div v-if="filteredProviders.length === 0" class="text-sm text-gray-500 px-1 py-1">
               No providers
             </div>
@@ -323,10 +327,10 @@ function chipClass(active) {
       </template>
   </div>
 
-    <div class="sticky bottom-0 bg-gradient-to-t from-white via-white/95 to-white/0 p-4 border-t">
-      <button class="w-full bg-zinc-900 text-white rounded-md py-2 hover:bg-zinc-800" @click="apply">
-        Apply
-      </button>
-    </div>
+      <div class="pt-4 pb-10">
+        <button class="w-full bg-zinc-900 text-white rounded-full h-14 py-3 hover:bg-zinc-800" @click="apply">
+          Apply
+        </button>
+      </div>
   </div>
 </template>

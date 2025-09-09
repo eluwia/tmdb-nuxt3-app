@@ -20,6 +20,7 @@ const sentinelRef = ref(null)
 const observer = ref(null)
 let ctrl = null
 const showFilters = ref(false)
+const filterSideRef = ref(null)
 
 const fav = userFavorites()
 fav.init()
@@ -100,6 +101,13 @@ function toggleFav(item) {
 
 function openFilters() { showFilters.value = true }
 function closeFilters() { showFilters.value = false }
+
+// Clear all filters function
+function clearAll() {
+  // Dispatch a custom event that FilterSide can listen to
+  const event = new CustomEvent('clear-all-filters')
+  document.dispatchEvent(event)
+}
 </script>
 
 <template>
@@ -164,15 +172,19 @@ function closeFilters() { showFilters.value = false }
 
     <div v-show="showFilters" class="lg:hidden fixed inset-0 z-[350]">
       <div class="absolute inset-0 bg-black/50" @click="closeFilters"></div>
-        <div class="absolute inset-x-0 bottom-0 bg-zinc-100 text-zinc-900 p-4 max-h-[80vh] overflow-y-auto no-scrollbar shadow-2xl" style="border-radius: 2rem 2rem 0 0; overflow: hidden;">
-        <div class="flex items-center justify-between  mb-3">
-                     <button class="absolute top-2 right-4 h-10 pb-1 my-7 w-10 rounded-full  text-zinc-700 hover:bg-zinc-800/10 text-3xl group-hover:flex items-center justify-center" @click="closeFilters" title="Close">×</button>
-
-          
-        </div>
-        <div class="space-y-4">
-          <slot name="sidebar"></slot>
-        </div>
+        <div class="absolute inset-x-0 bottom-0 bg-zinc-100 text-zinc-900 shadow-2xl" style="border-radius: 2rem 2rem 0 0; height: 85vh; overflow: hidden;">
+          <div class="absolute top-0 left-0 right-0 flex items-center justify-between z-10 backdrop-blur-md bg-white/20 p-4" style="border-radius: 2rem 2rem 0 0;">
+            <h1 class="text-lg font-semibold text-zinc-900">Filters</h1>
+            <div class="flex items-center gap-3">
+              <button @click="clearAll" class="text-sm text-zinc-700 hover:text-zinc-900 font-medium px-3 py-1 rounded-lg backdrop-blur-sm bg-white/30 hover:bg-white/50 transition-all">Clear All</button>
+              <button class="h-10 w-10 pb-2 rounded-full bg-zinc-900/70 text-white hover:bg-zinc-800 text-3xl flex items-center justify-center backdrop-blur-sm leading-none" @click="closeFilters" title="Close">×</button>
+            </div>
+          </div>
+          <div style="height: 100%; padding: 4rem 1rem 1rem 1rem; overflow-y: auto; -webkit-overflow-scrolling: touch;">
+            <div class="space-y-4">
+              <slot name="sidebar"></slot>
+            </div>
+          </div>
       </div>
     </div>
   </div>
