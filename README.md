@@ -9,8 +9,6 @@ This project was developed during my internship and is deployed live on Vercel.
 [tmdb-nuxt3.vercel.app](https://tmdb-nuxt3-okb866d1n-eluwias-projects.vercel.app/)
 
 Scan the QR code below to open directly on your mobile device:  
-(Add your QR code image once uploaded)
-
 ![QR Code](./qr-code.png)
 
 ---
