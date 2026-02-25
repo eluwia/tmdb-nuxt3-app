@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     tmdbApiKey: process.env.NUXT_TMDB_API_KEY,
     public: {
+      tmdbKey: process.env.NUXT_TMDB_API_KEY,
       imgBase: 'https://image.tmdb.org/t/p'
     }
   },

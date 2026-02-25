@@ -2,7 +2,6 @@ export const useTmdbClient = () => {
   function get(path, params = {}, opts = {}) {
     const queryString = new URLSearchParams(params).toString()
     const url = `/api/tmdb${path}${queryString ? '?' + queryString : ''}`
-    console.log('Calling API route:', url)
     return $fetch(url, opts)
   }
   

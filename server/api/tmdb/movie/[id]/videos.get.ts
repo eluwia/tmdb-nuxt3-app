@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
   const query = getQuery(event)
   
-  const apiKey = config.tmdbApiKey || process.env.NUXT_TMDB_API_KEY || '348088421ad3fb3a9d6e56bb6a9a8f80'
+  const apiKey = config.tmdbApiKey || process.env.NUXT_TMDB_API_KEY
   if (!apiKey) {
     throw createError({
       statusCode: 500,
